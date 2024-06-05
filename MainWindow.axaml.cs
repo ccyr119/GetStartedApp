@@ -22,13 +22,19 @@ public partial class MainWindow : Window
         Debug.WriteLine($"Clicked! Celsius={tbCelsius.Text}");
         TypeInfo typeInfo = typeof(MainWindow).GetTypeInfo();
         Console.WriteLine($"The assembley qualified name of MainWindow is {typeInfo.AssemblyQualifiedName}");
+
+        TestAttribute(typeInfo);
+
+        TranlateCelsiusToFahrenheit();
+    }
+
+    private static void TestAttribute(TypeInfo typeInfo)
+    {
         IEnumerable<Attribute> attrs = typeInfo.GetCustomAttributes();
         foreach (Attribute attr in attrs)
         {
             Console.WriteLine($"Attribute on MainWindow: {attr.GetType().Name}");
         }
-
-        TranlateCelsiusToFahrenheit();
     }
 
     public void tbCelsius_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs args)
